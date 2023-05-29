@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/layoutCollapse">
+        <Constraint
+            android:id="@+id/bottomContainer"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="30dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="1.0"
+            motion:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                motion:attributeName="Round"
+                motion:customDimension="35dp" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/imageEmojiBottom"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            motion:layout_constraintEnd_toEndOf="@+id/bottomContainer"
+            motion:layout_constraintStart_toStartOf="@+id/bottomContainer"
+            motion:layout_constraintTop_toTopOf="@+id/bottomContainer" />
+
+        <Constraint
+            android:id="@+id/collapseMainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintBottom_toTopOf="@+id/collapseTextMessage"
+            motion:layout_constraintTop_toTopOf="@+id/bottomContainer"
+            motion:transitionEasing="standard"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_editor_absoluteX="360dp" />
+
+        <Constraint
+            android:id="@+id/collapseTextMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@+id/bottomContainer"
+            motion:layout_constraintTop_toTopOf="@+id/collapseMainText"
+            motion:transitionEasing="standard"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_editor_absoluteX="360dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/layoutExpanded">
+        <Constraint
+            android:id="@+id/bottomContainer"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="30dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.986">
+            <CustomAttribute
+                motion:attributeName="Round"
+                motion:customDimension="10dp" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/imageEmojiBottom"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            motion:layout_constraintEnd_toEndOf="@+id/bottomContainer"
+            motion:layout_constraintHorizontal_bias="0.042"
+            motion:layout_constraintStart_toStartOf="@+id/bottomContainer"
+            motion:layout_constraintTop_toTopOf="@+id/bottomContainer" />
+
+        <Constraint
+            android:id="@+id/collapseMainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="8dp"
+            motion:layout_constraintEnd_toEndOf="@+id/bottomContainer"
+            motion:layout_constraintStart_toEndOf="@+id/imageEmojiBottom"
+            motion:layout_constraintTop_toTopOf="@id/bottomContainer" />
+
+        <Constraint
+            android:id="@+id/collapseTextMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintEnd_toEndOf="@+id/bottomContainer"
+            motion:layout_constraintStart_toEndOf="@+id/imageEmojiBottom"
+            motion:layout_constraintTop_toBottomOf="@+id/collapseMainText" />
+    </ConstraintSet>
+
+    <Transition
+        motion:constraintSetEnd="@+id/layoutExpanded"
+        motion:constraintSetStart="@id/layoutCollapse"
+        motion:duration="600"
+        motion:motionInterpolator="overshoot">
+
+        <OnClick
+            motion:clickAction="transitionToEnd"
+            motion:targetId="@id/bottomContainer" />
+    </Transition>
+
+    <Transition
+        motion:constraintSetEnd="@+id/layoutCollapse"
+        motion:constraintSetStart="@id/layoutExpanded"
+        motion:duration="600"
+        motion:motionInterpolator="overshoot">
+
+        <OnClick
+            motion:clickAction="transitionToEnd"
+            motion:targetId="@id/bottomContainer" />
+    </Transition>
+
+</MotionScene>
